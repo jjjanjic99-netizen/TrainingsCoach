@@ -78,6 +78,8 @@ export interface TrainingSession {
   date: string;
   type: SessionType;
   durationSeconds?: number;
+  /** Gesamtdistanz in Metern (v. a. für Läufe – Pace = Distanz/Dauer). */
+  distanceM?: number;
   /** Wahrgenommene Anstrengung (RPE 1–10). */
   rpe?: number;
   avgHr?: number;

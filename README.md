@@ -6,8 +6,22 @@ eigenes Icon, **offline-fähig**, Daten bleiben **lokal auf dem Gerät** (kein
 Backend). Die Oberfläche ist durchgehend auf Deutsch (Schweizer Schreibweise,
 metrische Einheiten).
 
-> **Status: Stufe 1** – App-Grundgerüst. Die App wird in Ausbaustufen
-> entwickelt (siehe [`CLAUDE.md`](./CLAUDE.md)).
+> **Status: Stufe 2** – MVP. Die App wird in Ausbaustufen entwickelt
+> (siehe [`CLAUDE.md`](./CLAUDE.md)).
+
+## Was in Stufe 2 enthalten ist (MVP)
+
+- **Profil**: Name, Alter, Geschlecht, Körpergewicht, Division
+  (Open/Pro/Doubles/Relay), Level, Ziel-Renndatum und Ziel-Finishzeit
+- **Baseline-Assessment**: Startwerte pro Station (Zeit/Reps/Last) plus
+  Lauf-Benchmarks (1 km Time-Trial, 5 km) – wiederholbar
+- **Trainings-Logging**: Einheiten erfassen/bearbeiten/löschen mit Typ,
+  Dauer, Distanz, Lauf-Splits, Stationsergebnissen, RPE, Herzfrequenz und
+  Notizen
+- **Fortschritts-Dashboard**: Kennzahlen, Stationstrend (wählbar),
+  Lauf-Pace-Entwicklung, Wochenvolumen und automatisch abgeleitete
+  Bestleistungen pro Station (Diagramme via `recharts`)
+- Startseite mit Begrüssung, Renn-Countdown und Setup-Fortschritt
 
 ## Was in Stufe 1 enthalten ist
 

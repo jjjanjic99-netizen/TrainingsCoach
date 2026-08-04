@@ -14,6 +14,7 @@ import { db } from "@/lib/db/db";
 import {
   getLatestAssessment,
   getProfile,
+  getSession,
   listPersonalRecords,
   listSessions,
 } from "@/lib/db/repositories";
@@ -26,6 +27,20 @@ export function useProfile() {
 /** Alle Trainingseinheiten, neueste zuerst. */
 export function useSessions() {
   return useLiveQuery(() => listSessions(), []);
+}
+
+/**
+ * Einzelne Trainingseinheit per ID.
+ * Rückgabe: undefined = lädt, null = nicht gefunden.
+ */
+export function useSession(id: number | undefined) {
+  return useLiveQuery(
+    async () => {
+      if (id == null || Number.isNaN(id)) return null;
+      return (await getSession(id)) ?? null;
+    },
+    [id],
+  );
 }
 
 /** Alle persönlichen Rekorde. */

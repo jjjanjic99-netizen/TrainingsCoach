@@ -131,6 +131,18 @@ export const WALL_BALL_REPS = {
   d: 100,
 } as const;
 
+/**
+ * Stationen mit relevantem Gewicht (Last in kg) – abhängig von der Division.
+ * Für diese Stationen wird im Baseline-Assessment/Logging ein kg-Feld angeboten.
+ */
+export const STATIONS_WITH_LOAD: ReadonlySet<HyroxStationId> = new Set<HyroxStationId>([
+  "sled_push",
+  "sled_pull",
+  "farmers_carry",
+  "sandbag_lunges",
+  "wall_balls",
+]);
+
 /** Schnellzugriff auf eine Station per ID. */
 export function getStation(id: HyroxStationId): HyroxStation {
   const station = HYROX_STATIONS.find((s) => s.id === id);

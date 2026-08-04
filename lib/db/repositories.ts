@@ -61,6 +61,10 @@ export function listSessions(): Promise<TrainingSession[]> {
   return db.sessions.orderBy("date").reverse().toArray();
 }
 
+export function getSession(id: number): Promise<TrainingSession | undefined> {
+  return db.sessions.get(id);
+}
+
 export async function addSession(
   session: Omit<TrainingSession, "id" | "createdAt" | "updatedAt">,
 ): Promise<number> {

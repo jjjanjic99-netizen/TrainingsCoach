@@ -60,3 +60,35 @@ export function weeksUntil(targetIso: string | undefined | null): number | null 
   const diffMs = target - Date.now();
   return Math.round(diffMs / (7 * 24 * 3600 * 1000));
 }
+
+/**
+ * Parst eine Zeiteingabe zu Sekunden.
+ * Akzeptiert "mm:ss", "hh:mm:ss" oder eine reine Sekundenzahl.
+ * Komma wird als Dezimaltrennzeichen akzeptiert. Ungültig -> null.
+ */
+export function parseDurationInput(input: string | undefined | null): number | null {
+  if (input == null) return null;
+  const raw = String(input).trim();
+  if (raw === "") return null;
+
+  if (raw.includes(":")) {
+    const parts = raw.split(":").map((p) => p.trim());
+    if (parts.some((p) => !/^\d+([.,]\d+)?$/.test(p))) return null;
+    const nums = parts.map((p) => parseFloat(p.replace(",", ".")));
+    if (nums.length === 2) return Math.round(nums[0] * 60 + nums[1]);
+    if (nums.length === 3) return Math.round(nums[0] * 3600 + nums[1] * 60 + nums[2]);
+    return null;
+  }
+
+  if (!/^\d+([.,]\d+)?$/.test(raw)) return null;
+  return Math.round(parseFloat(raw.replace(",", ".")));
+}
+
+/** Parst eine Zahleneingabe (Komma erlaubt) -> number | null. */
+export function parseNumberInput(input: string | undefined | null): number | null {
+  if (input == null) return null;
+  const raw = String(input).trim().replace(",", ".");
+  if (raw === "") return null;
+  const n = Number(raw);
+  return Number.isFinite(n) ? n : null;
+}

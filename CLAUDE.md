@@ -88,8 +88,9 @@ Wechsel mit 8 Stationen (jeweils **Lauf → Station**):
 1. **[erledigt]** Projekt-Setup + PWA-Grundgerüst: Scaffold, Manifest, Service
    Worker/Offline, Home-Screen-Onboarding, Safe-Area, Dexie-Datenschicht,
    JSON-Export/Import, Tab-Bar-Navigation, Dark-Mode.
-2. MVP: Profil + Baseline-Assessment + Trainings-Logging + Dashboard mit
-   Stationstrend.
+2. **[erledigt]** MVP: Profil + Baseline-Assessment + Trainings-Logging +
+   Dashboard mit Stationstrend (Auswertungen in `lib/hyrox/stats.ts`,
+   Diagramme via recharts in `components/charts.tsx`).
 3. Trainingsplan-Generator + Wochenansicht.
 4. Lauf-Coaching-Modul + Pace-Zonen.
 5. Renn-Simulator/Prognose + Stärken/Schwächen-Radar + Was-wäre-wenn.
