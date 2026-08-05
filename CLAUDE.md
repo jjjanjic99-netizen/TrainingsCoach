@@ -94,7 +94,10 @@ Wechsel mit 8 Stationen (jeweils **Lauf → Station**):
 3. **[erledigt]** Trainingsplan-Generator + Wochenansicht (periodisiert
    Base→Build→Peak→Taper mit Deload; Logik in `lib/hyrox/plan.ts`, UI in
    `components/plan-view.tsx`, Persistenz in Dexie-Tabelle `plans`).
-4. Lauf-Coaching-Modul + Pace-Zonen.
+4. **[erledigt]** Lauf-Coaching-Modul + Pace-Zonen (VDOT-Logik in
+   `lib/hyrox/running.ts`: Pace-Zonen, Intervall-Workouts,
+   Wochenkilometer-Progression; UI in `components/lauf-coaching.tsx`,
+   Route `/lauf`).
 5. Renn-Simulator/Prognose + Stärken/Schwächen-Radar + Was-wäre-wenn.
 6. CSV/JSON-Import-Schema für Watch-Daten + optional Readiness/Push.
 

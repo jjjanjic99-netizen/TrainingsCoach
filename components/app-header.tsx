@@ -13,6 +13,7 @@ import { ChevronLeft, Settings } from "lucide-react";
 const ROUTE_TITLES: Array<{ prefix: string; title: string }> = [
   { prefix: "/training", title: "Training" },
   { prefix: "/plan", title: "Trainingsplan" },
+  { prefix: "/lauf", title: "Lauf-Coaching" },
   { prefix: "/fortschritt", title: "Fortschritt" },
   { prefix: "/profil", title: "Profil" },
   { prefix: "/einstellungen", title: "Einstellungen" },
@@ -24,17 +25,20 @@ function titleForPath(pathname: string): string {
   return match?.title ?? "Hyrox Coach";
 }
 
+/** Oberste Ebenen (Tab-Bar). Alles andere ist eine Unterseite (Zurück-Pfeil). */
+const TOP_LEVEL = ["/", "/training", "/plan", "/fortschritt", "/profil"];
+
 export function AppHeader() {
   const pathname = usePathname();
   const router = useRouter();
   const title = titleForPath(pathname);
-  const isSettings = pathname.startsWith("/einstellungen");
+  const isTopLevel = TOP_LEVEL.includes(pathname);
 
   return (
     <header className="sticky top-0 z-30 border-b border-border bg-background/90 pt-safe backdrop-blur">
       <div className="mx-auto flex h-14 max-w-xl items-center justify-between gap-2 px-3">
         <div className="flex items-center gap-1">
-          {isSettings ? (
+          {!isTopLevel ? (
             <button
               type="button"
               onClick={() => router.back()}
@@ -47,7 +51,7 @@ export function AppHeader() {
           <span className="text-lg font-bold tracking-tight">{title}</span>
         </div>
 
-        {!isSettings ? (
+        {isTopLevel ? (
           <Link
             href="/einstellungen"
             aria-label="Einstellungen"

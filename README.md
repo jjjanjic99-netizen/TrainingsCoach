@@ -6,8 +6,19 @@ eigenes Icon, **offline-fähig**, Daten bleiben **lokal auf dem Gerät** (kein
 Backend). Die Oberfläche ist durchgehend auf Deutsch (Schweizer Schreibweise,
 metrische Einheiten).
 
-> **Status: Stufe 3** – Trainingsplan. Die App wird in Ausbaustufen entwickelt
+> **Status: Stufe 4** – Lauf-Coaching. Die App wird in Ausbaustufen entwickelt
 > (siehe [`CLAUDE.md`](./CLAUDE.md)).
+
+## Was in Stufe 4 enthalten ist
+
+- **Pace-Zonen aus einem Lauf-Test** (VDOT nach Jack Daniels): Easy, Marathon,
+  Threshold, Interval und Repetition – vorbelegt aus dem Baseline-Assessment
+  (1 km/5 km) oder frei eingebbar
+- **Intervall-Workouts** mit konkreten Zielzeiten je Wiederholung
+  (Cruise-Intervalle, VO₂max-Intervalle, Wiederholungen)
+- **Wochenkilometer-Progression** mit begrenzter Steigerung (~10 %/Woche) und
+  Deload alle 4 Wochen – Startwert automatisch aus geloggten Läufen
+- Verzahnt mit dem Hyrox-Plan (Route `/lauf`)
 
 ## Was in Stufe 3 enthalten ist
 

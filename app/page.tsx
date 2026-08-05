@@ -1,6 +1,5 @@
 import Link from "next/link";
 import {
-  Activity,
   CheckCircle2,
   ChevronRight,
   Circle,
@@ -17,7 +16,7 @@ const STAGES: Array<{ n: number; title: string; done: boolean }> = [
   { n: 1, title: "PWA-Grundgerüst, Datenschicht, Navigation", done: true },
   { n: 2, title: "Profil, Baseline-Assessment, Logging, Dashboard", done: true },
   { n: 3, title: "Trainingsplan-Generator & Wochenansicht", done: true },
-  { n: 4, title: "Lauf-Coaching & Pace-Zonen", done: false },
+  { n: 4, title: "Lauf-Coaching & Pace-Zonen", done: true },
   { n: 5, title: "Renn-Simulator, Prognose & Radar", done: false },
   { n: 6, title: "Watch-Import (CSV/JSON) & Readiness", done: false },
 ];
@@ -101,7 +100,7 @@ export default function HomePage() {
         <SectionTitle>Schnellzugriff</SectionTitle>
         <div className="grid grid-cols-2 gap-3">
           <QuickLink href="/training" label="Training loggen" icon={<Dumbbell className="h-5 w-5" />} />
-          <QuickLink href="/fortschritt" label="Fortschritt" icon={<Activity className="h-5 w-5" />} />
+          <QuickLink href="/lauf" label="Lauf-Coaching" icon={<Footprints className="h-5 w-5" />} />
         </div>
       </section>
     </div>
