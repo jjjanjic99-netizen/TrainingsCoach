@@ -98,7 +98,11 @@ Wechsel mit 8 Stationen (jeweils **Lauf → Station**):
    `lib/hyrox/running.ts`: Pace-Zonen, Intervall-Workouts,
    Wochenkilometer-Progression; UI in `components/lauf-coaching.tsx`,
    Route `/lauf`).
-5. Renn-Simulator/Prognose + Stärken/Schwächen-Radar + Was-wäre-wenn.
+5. **[erledigt]** Renn-Simulator/Prognose + Stärken/Schwächen-Radar +
+   Was-wäre-wenn (Logik in `lib/hyrox/forecast.ts`, UI in
+   `components/race-simulator.tsx`, Radar via recharts, Route `/prognose`).
+   Hinweis: Wall Balls werden seit dieser Stufe zeitbasiert getrackt
+   (`metric: "time"`), damit alle 8 Stationen in die Prognose einfliessen.
 6. CSV/JSON-Import-Schema für Watch-Daten + optional Readiness/Push.
 
 **Arbeitsweise:** Je Stufe einen lauffähigen Stand liefern, committen und

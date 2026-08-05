@@ -17,7 +17,7 @@ const STAGES: Array<{ n: number; title: string; done: boolean }> = [
   { n: 2, title: "Profil, Baseline-Assessment, Logging, Dashboard", done: true },
   { n: 3, title: "Trainingsplan-Generator & Wochenansicht", done: true },
   { n: 4, title: "Lauf-Coaching & Pace-Zonen", done: true },
-  { n: 5, title: "Renn-Simulator, Prognose & Radar", done: false },
+  { n: 5, title: "Renn-Simulator, Prognose & Radar", done: true },
   { n: 6, title: "Watch-Import (CSV/JSON) & Readiness", done: false },
 ];
 

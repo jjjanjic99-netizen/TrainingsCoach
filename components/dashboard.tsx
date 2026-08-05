@@ -8,7 +8,14 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { Activity, CalendarClock, ClipboardCheck, Plus } from "lucide-react";
+import {
+  Activity,
+  CalendarClock,
+  ChevronRight,
+  ClipboardCheck,
+  Plus,
+  Timer,
+} from "lucide-react";
 import { Card, CardBody, CardHeader, SectionTitle } from "@/components/ui";
 import { Select } from "@/components/form";
 import { TrendLineChart, VolumeBarChart } from "@/components/charts";
@@ -78,6 +85,23 @@ export function Dashboard() {
           label="Wochen bis Rennen"
         />
       </div>
+
+      {/* Renn-Prognose */}
+      <Link
+        href="/prognose"
+        className="flex items-center justify-between gap-3 rounded-2xl border border-border bg-card p-4 shadow-sm transition hover:border-primary/40"
+      >
+        <span className="flex items-center gap-3">
+          <Timer className="h-5 w-5 text-primary" aria-hidden />
+          <span>
+            <span className="block text-sm font-semibold">Renn-Simulator &amp; Prognose</span>
+            <span className="block text-xs text-muted-foreground">
+              Finishzeit, Radar &amp; Was-wäre-wenn
+            </span>
+          </span>
+        </span>
+        <ChevronRight className="h-4 w-4 text-muted-foreground" aria-hidden />
+      </Link>
 
       {/* Stationstrend */}
       <section className="space-y-2">

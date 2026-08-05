@@ -6,8 +6,19 @@ eigenes Icon, **offline-fähig**, Daten bleiben **lokal auf dem Gerät** (kein
 Backend). Die Oberfläche ist durchgehend auf Deutsch (Schweizer Schreibweise,
 metrische Einheiten).
 
-> **Status: Stufe 4** – Lauf-Coaching. Die App wird in Ausbaustufen entwickelt
+> **Status: Stufe 5** – Renn-Simulator. Die App wird in Ausbaustufen entwickelt
 > (siehe [`CLAUDE.md`](./CLAUDE.md)).
+
+## Was in Stufe 5 enthalten ist
+
+- **Renn-Simulator/Prognose** (`/prognose`): geschätzte Finishzeit aus
+  Stationssplits + 8 Läufen + Roxzone, inkl. Verlauf über die Zeit
+- **Limitierende Stationen** und ein **Stärken/Schwächen-Radar** relativ zu den
+  Zielsplits (aus der Ziel-Finishzeit oder einem Referenz-Benchmark)
+- Interaktive **Was-wäre-wenn-Szenarien** (Splits/Pace anpassen → neue
+  Gesamtzeit)
+- Wall Balls werden ab hier zeitbasiert getrackt (alle 8 Stationen fliessen in
+  die Prognose ein)
 
 ## Was in Stufe 4 enthalten ist
 

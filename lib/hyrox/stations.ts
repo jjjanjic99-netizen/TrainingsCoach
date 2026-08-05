@@ -113,8 +113,10 @@ export const HYROX_STATIONS: readonly HyroxStation[] = [
     order: 8,
     name: "Wall Balls",
     shortName: "Wall Balls",
-    metric: "reps",
-    description: "Wall Balls: 100 Reps (Männer) bzw. 75 Reps (Frauen).",
+    // Im Rennen zeitgemessen (die Rep-Zahl ist fix: 100 Männer / 75 Frauen).
+    // Deshalb wird die Zeit für den Satz getrackt (siehe WALL_BALL_REPS).
+    metric: "time",
+    description: "Wall Balls: Zeit für den Satz (100 Reps Männer / 75 Frauen).",
   },
 ] as const;
 

@@ -14,6 +14,7 @@ const ROUTE_TITLES: Array<{ prefix: string; title: string }> = [
   { prefix: "/training", title: "Training" },
   { prefix: "/plan", title: "Trainingsplan" },
   { prefix: "/lauf", title: "Lauf-Coaching" },
+  { prefix: "/prognose", title: "Prognose" },
   { prefix: "/fortschritt", title: "Fortschritt" },
   { prefix: "/profil", title: "Profil" },
   { prefix: "/einstellungen", title: "Einstellungen" },

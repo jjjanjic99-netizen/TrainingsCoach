@@ -13,6 +13,11 @@ import {
   CartesianGrid,
   Line,
   LineChart,
+  PolarAngleAxis,
+  PolarGrid,
+  PolarRadiusAxis,
+  Radar,
+  RadarChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -48,11 +53,17 @@ function shortDate(iso: string): string {
   return d.toLocaleDateString("de-CH", { day: "2-digit", month: "2-digit" });
 }
 
-function ChartFrame({ children }: { children: React.ReactElement }) {
+function ChartFrame({
+  children,
+  height = 220,
+}: {
+  children: React.ReactElement;
+  height?: number;
+}) {
   const mounted = useMounted();
-  if (!mounted) return <div className="h-[220px] w-full" aria-hidden />;
+  if (!mounted) return <div style={{ height }} className="w-full" aria-hidden />;
   return (
-    <ResponsiveContainer width="100%" height={220}>
+    <ResponsiveContainer width="100%" height={height}>
       {children}
     </ResponsiveContainer>
   );
@@ -194,6 +205,38 @@ export function VolumeBarChart({
         />
         <Bar dataKey="value" fill={colors.accent} radius={[4, 4, 0, 0]} isAnimationActive={false} />
       </BarChart>
+    </ChartFrame>
+  );
+}
+
+export interface RadarDatum {
+  subject: string;
+  score: number;
+}
+
+/**
+ * Stärken/Schwächen-Radar. Score 1.0 = auf Zielsplit, >1 = besser (Stärke),
+ * <1 = schlechter (Schwäche). Der Kreis bei 1.0 markiert das Ziel.
+ */
+export function StrengthRadar({ data }: { data: RadarDatum[] }) {
+  const colors = useChartColors();
+  return (
+    <ChartFrame height={300}>
+      <RadarChart data={data} outerRadius="68%" margin={{ top: 8, right: 24, bottom: 8, left: 24 }}>
+        <PolarGrid stroke={colors.grid} />
+        <PolarAngleAxis
+          dataKey="subject"
+          tick={{ fontSize: 10, fill: colors.axis }}
+        />
+        <PolarRadiusAxis domain={[0.6, 1.4]} tick={false} axisLine={false} />
+        <Radar
+          dataKey="score"
+          stroke={colors.line}
+          fill={colors.line}
+          fillOpacity={0.35}
+          isAnimationActive={false}
+        />
+      </RadarChart>
     </ChartFrame>
   );
 }
