@@ -1,5 +1,7 @@
 # Hyrox Coach
 
+[![CI](https://github.com/jjjanjic99-netizen/TrainingsCoach/actions/workflows/ci.yml/badge.svg)](https://github.com/jjjanjic99-netizen/TrainingsCoach/actions/workflows/ci.yml)
+
 Persönliche **Hyrox-Trainings-Coach-App** als installierbare **PWA** – gebaut
 für die Nutzung auf dem iPhone über „Zum Home-Bildschirm hinzufügen": Vollbild,
 eigenes Icon, **offline-fähig**, Daten bleiben **lokal auf dem Gerät** (kein
