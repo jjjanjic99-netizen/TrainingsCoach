@@ -5,6 +5,8 @@ import {
   Circle,
   Dumbbell,
   Footprints,
+  HeartPulse,
+  Timer,
 } from "lucide-react";
 import { InstallPrompt } from "@/components/install-prompt";
 import { HomeStatus } from "@/components/home-status";
@@ -18,7 +20,7 @@ const STAGES: Array<{ n: number; title: string; done: boolean }> = [
   { n: 3, title: "Trainingsplan-Generator & Wochenansicht", done: true },
   { n: 4, title: "Lauf-Coaching & Pace-Zonen", done: true },
   { n: 5, title: "Renn-Simulator, Prognose & Radar", done: true },
-  { n: 6, title: "Watch-Import (CSV/JSON) & Readiness", done: false },
+  { n: 6, title: "Watch-Import (CSV/JSON) & Readiness", done: true },
 ];
 
 export default function HomePage() {
@@ -101,6 +103,8 @@ export default function HomePage() {
         <div className="grid grid-cols-2 gap-3">
           <QuickLink href="/training" label="Training loggen" icon={<Dumbbell className="h-5 w-5" />} />
           <QuickLink href="/lauf" label="Lauf-Coaching" icon={<Footprints className="h-5 w-5" />} />
+          <QuickLink href="/prognose" label="Prognose" icon={<Timer className="h-5 w-5" />} />
+          <QuickLink href="/readiness" label="Readiness" icon={<HeartPulse className="h-5 w-5" />} />
         </div>
       </section>
     </div>

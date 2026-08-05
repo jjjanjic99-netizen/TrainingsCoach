@@ -6,8 +6,16 @@ eigenes Icon, **offline-fähig**, Daten bleiben **lokal auf dem Gerät** (kein
 Backend). Die Oberfläche ist durchgehend auf Deutsch (Schweizer Schreibweise,
 metrische Einheiten).
 
-> **Status: Stufe 5** – Renn-Simulator. Die App wird in Ausbaustufen entwickelt
+> **Status: Stufe 6 (alle Stufen umgesetzt).** Entwicklung in Ausbaustufen
 > (siehe [`CLAUDE.md`](./CLAUDE.md)).
+
+## Was in Stufe 6 enthalten ist
+
+- **Watch-Daten-Import** (`/import`): CSV oder JSON exportierter Workouts
+  einlesen, in einer Vorschau prüfen und als neue Einheit anlegen oder einer
+  bestehenden zuordnen (siehe [Import-Schema](#import-schema-für-watch-daten))
+- **Recovery/Readiness** (`/readiness`): täglicher Kurz-Input (Schlaf,
+  Muskelkater, Motivation) mit einfacher Deload-/Erholungs-Empfehlung
 
 ## Was in Stufe 5 enthalten ist
 
@@ -157,6 +165,50 @@ mitgesichert):
 
 Beim Import kann zwischen **Ersetzen** (vorhandene Daten überschreiben) und
 **Zusammenführen** (per Primärschlüssel ergänzen/aktualisieren) gewählt werden.
+
+## Import-Schema für Watch-Daten
+
+Unter **Training → „Watch-Daten importieren"** (`/import`) lassen sich
+exportierte Workouts als **CSV** oder **JSON** einlesen. `date` ist Pflicht,
+alle übrigen Felder sind optional. Feldnamen sind gross-/kleinunabhängig und
+kennen deutsche/englische Aliase.
+
+**Felder:** `date` (YYYY-MM-DD oder DD.MM.YYYY), `type` (z. B. `easy_run`,
+`tempo_run`, `long_run`, `interval_run`, `strength`, `compromised_run`,
+`race_simulation` – auch Aliase wie `run`, `lauf`, `tempo`), `duration`
+(`mm:ss`, `hh:mm:ss` oder Sekunden), `distance` (Meter) bzw. `distance_km`,
+`avg_hr`, `max_hr`, `notes`. **Splits** werden nur im JSON-Format unterstützt.
+
+**CSV-Beispiel:**
+
+```csv
+date,type,duration,distance,avg_hr,max_hr,notes
+2026-08-01,easy_run,00:42:30,8000,142,156,Lockerer Dauerlauf
+2026-08-03,tempo_run,00:35:00,7500,165,178,4x 1km Schwelle
+```
+
+**JSON-Beispiel (mit Splits):**
+
+```json
+[
+  {
+    "date": "2026-08-01",
+    "type": "long_run",
+    "durationSeconds": 5400,
+    "distanceM": 15000,
+    "avgHr": 148,
+    "maxHr": 165,
+    "splits": [
+      { "distanceM": 1000, "durationSeconds": 350 },
+      { "distanceM": 1000, "durationSeconds": 345 }
+    ]
+  }
+]
+```
+
+Jeder erkannte Eintrag kann in der Vorschau **als neue Einheit** angelegt oder
+**einer bestehenden Einheit zugeordnet** werden (Herzfrequenz, Distanz, Dauer
+und Splits werden übernommen). Manuelle Eingabe bleibt jederzeit möglich.
 
 ## Daten & Privatsphäre
 

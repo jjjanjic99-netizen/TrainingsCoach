@@ -17,6 +17,7 @@ import {
   getProfile,
   getSession,
   listPersonalRecords,
+  listReadiness,
   listSessions,
 } from "@/lib/db/repositories";
 
@@ -60,6 +61,11 @@ export function useLatestAssessment() {
  */
 export function useActivePlan() {
   return useLiveQuery(async () => (await getActivePlan()) ?? null, []);
+}
+
+/** Alle Readiness-Einträge, neueste zuerst. */
+export function useReadiness() {
+  return useLiveQuery(() => listReadiness(), []);
 }
 
 /** Anzahl Zeilen je Tabelle (für Speicher-/Datenübersicht). */

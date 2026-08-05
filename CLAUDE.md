@@ -103,7 +103,11 @@ Wechsel mit 8 Stationen (jeweils **Lauf → Station**):
    `components/race-simulator.tsx`, Radar via recharts, Route `/prognose`).
    Hinweis: Wall Balls werden seit dieser Stufe zeitbasiert getrackt
    (`metric: "time"`), damit alle 8 Stationen in die Prognose einfliessen.
-6. CSV/JSON-Import-Schema für Watch-Daten + optional Readiness/Push.
+6. **[erledigt]** CSV/JSON-Import für Watch-Daten (Parser in
+   `lib/import/watch-import.ts`, UI `components/watch-import.tsx`, Route
+   `/import`) + Recovery/Readiness (Logik `lib/hyrox/readiness.ts`, UI
+   `components/readiness-view.tsx`, Route `/readiness`, Dexie-Tabelle
+   `readiness`). Push-Benachrichtigungen bleiben eine spätere Option.
 
 **Arbeitsweise:** Je Stufe einen lauffähigen Stand liefern, committen und
 stoppen. Erst nach OK die nächste Stufe.

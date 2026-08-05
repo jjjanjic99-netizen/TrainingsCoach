@@ -12,6 +12,8 @@ import { ChevronLeft, Settings } from "lucide-react";
 /** Titel je Route (Prefix-Match für Unterseiten). */
 const ROUTE_TITLES: Array<{ prefix: string; title: string }> = [
   { prefix: "/training", title: "Training" },
+  { prefix: "/import", title: "Import" },
+  { prefix: "/readiness", title: "Readiness" },
   { prefix: "/plan", title: "Trainingsplan" },
   { prefix: "/lauf", title: "Lauf-Coaching" },
   { prefix: "/prognose", title: "Prognose" },
