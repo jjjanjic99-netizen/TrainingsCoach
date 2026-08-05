@@ -65,6 +65,8 @@ export interface TrainingPlan {
   startDateIso: string;
   raceDateIso?: string;
   weeks: PlanWeek[];
+  /** Markiert einen automatisch erzeugten Demo-Plan (einklick-löschbar). */
+  demo?: boolean;
 }
 
 /* ----------------------------- Datum-Helfer ---------------------------- */

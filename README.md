@@ -109,6 +109,18 @@ npm start
 2. Teilen-Menü → **„Zum Home-Bildschirm"**.
 3. Die App startet danach im Vollbild und funktioniert offline.
 
+## Testen & Demo-Daten
+
+Ausführliche Test- und iPhone-Anleitung: **[`TESTING.md`](./TESTING.md)**.
+
+```bash
+npm run build && npm run typecheck && npm run lint && npm run test
+```
+
+Zum sofortigen Ausprobieren: **Einstellungen → Testdaten → „Demo-Daten laden"**
+befüllt Dashboard, Charts, Prognose und Radar mit klar gekennzeichneten
+Beispiel-Einträgen (jederzeit rückstandslos löschbar).
+
 ## Deployment
 
 Die App ist eine Standard-Next.js-App und lässt sich unverändert auf

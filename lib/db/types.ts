@@ -26,6 +26,8 @@ export interface Profile {
   targetFinishSeconds?: number;
   createdAt: string;
   updatedAt: string;
+  /** Markiert automatisch erzeugte Demo-Daten (einklick-löschbar). */
+  demo?: boolean;
 }
 
 /** Persönliche Bestleistung pro Station. */
@@ -89,6 +91,8 @@ export interface TrainingSession {
   stationResults?: SessionStationResult[];
   createdAt: string;
   updatedAt: string;
+  /** Markiert automatisch erzeugte Demo-Daten (einklick-löschbar). */
+  demo?: boolean;
 }
 
 /** Startwert einer Station im Baseline-Assessment. */
@@ -110,6 +114,8 @@ export interface Assessment {
   run5kSeconds?: number;
   notes?: string;
   createdAt: string;
+  /** Markiert automatisch erzeugte Demo-Daten (einklick-löschbar). */
+  demo?: boolean;
 }
 
 /** Täglicher Kurz-Input für Recovery/Readiness. */
@@ -124,4 +130,6 @@ export interface ReadinessEntry {
   motivation?: number;
   notes?: string;
   createdAt: string;
+  /** Markiert automatisch erzeugte Demo-Daten (einklick-löschbar). */
+  demo?: boolean;
 }
