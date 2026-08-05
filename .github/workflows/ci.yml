@@ -1,11 +1,12 @@
 name: CI
 
-# Läuft bei jedem Push (alle Branches) und bei Pull Requests.
+# Läuft bei Pull Requests und bei Pushes auf main.
+# (Der PR-Trigger deckt den Feature-Branch ab – so entstehen keine Doppelläufe.)
 # Prüft Lint, Typen, Unit-Tests und den Produktions-Build.
 on:
   push:
     branches:
-      - "**"
+      - main
   pull_request:
 
 # Ältere Läufe desselben Refs abbrechen, sobald ein neuer startet.
