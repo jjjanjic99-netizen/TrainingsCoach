@@ -91,7 +91,9 @@ Wechsel mit 8 Stationen (jeweils **Lauf → Station**):
 2. **[erledigt]** MVP: Profil + Baseline-Assessment + Trainings-Logging +
    Dashboard mit Stationstrend (Auswertungen in `lib/hyrox/stats.ts`,
    Diagramme via recharts in `components/charts.tsx`).
-3. Trainingsplan-Generator + Wochenansicht.
+3. **[erledigt]** Trainingsplan-Generator + Wochenansicht (periodisiert
+   Base→Build→Peak→Taper mit Deload; Logik in `lib/hyrox/plan.ts`, UI in
+   `components/plan-view.tsx`, Persistenz in Dexie-Tabelle `plans`).
 4. Lauf-Coaching-Modul + Pace-Zonen.
 5. Renn-Simulator/Prognose + Stärken/Schwächen-Radar + Was-wäre-wenn.
 6. CSV/JSON-Import-Schema für Watch-Daten + optional Readiness/Push.

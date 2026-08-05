@@ -16,7 +16,7 @@ import { HYROX_STATIONS, RUN_SEGMENTS, RUN_DISTANCE_M } from "@/lib/hyrox/statio
 const STAGES: Array<{ n: number; title: string; done: boolean }> = [
   { n: 1, title: "PWA-Grundgerüst, Datenschicht, Navigation", done: true },
   { n: 2, title: "Profil, Baseline-Assessment, Logging, Dashboard", done: true },
-  { n: 3, title: "Trainingsplan-Generator & Wochenansicht", done: false },
+  { n: 3, title: "Trainingsplan-Generator & Wochenansicht", done: true },
   { n: 4, title: "Lauf-Coaching & Pace-Zonen", done: false },
   { n: 5, title: "Renn-Simulator, Prognose & Radar", done: false },
   { n: 6, title: "Watch-Import (CSV/JSON) & Readiness", done: false },

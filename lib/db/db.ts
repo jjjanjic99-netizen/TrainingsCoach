@@ -14,6 +14,7 @@ import type {
   ReadinessEntry,
   TrainingSession,
 } from "./types";
+import type { TrainingPlan } from "@/lib/hyrox/plan";
 
 export class HyroxDatabase extends Dexie {
   // Tabellen (typisiert)
@@ -22,6 +23,7 @@ export class HyroxDatabase extends Dexie {
   sessions!: Table<TrainingSession, number>;
   assessments!: Table<Assessment, number>;
   readiness!: Table<ReadinessEntry, string>;
+  plans!: Table<TrainingPlan, string>;
 
   constructor() {
     super("hyrox-coach");
@@ -35,6 +37,12 @@ export class HyroxDatabase extends Dexie {
       sessions: "++id, date, type",
       assessments: "++id, date",
       readiness: "date",
+    });
+
+    // Version 2: Trainingsplan (Stufe 3). Bestehende Tabellen bleiben
+    // unverändert; nur die neue Tabelle wird ergänzt.
+    this.version(2).stores({
+      plans: "id",
     });
   }
 }
@@ -53,4 +61,5 @@ export const TABLE_NAMES = [
   "sessions",
   "assessments",
   "readiness",
+  "plans",
 ] as const;

@@ -12,6 +12,7 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "@/lib/db/db";
 import {
+  getActivePlan,
   getLatestAssessment,
   getProfile,
   getSession,
@@ -51,6 +52,14 @@ export function usePersonalRecords() {
 /** Jüngstes Baseline-Assessment. */
 export function useLatestAssessment() {
   return useLiveQuery(() => getLatestAssessment(), []);
+}
+
+/**
+ * Aktiver Trainingsplan.
+ * Rückgabe: undefined = lädt, null = keiner vorhanden.
+ */
+export function useActivePlan() {
+  return useLiveQuery(async () => (await getActivePlan()) ?? null, []);
 }
 
 /** Anzahl Zeilen je Tabelle (für Speicher-/Datenübersicht). */

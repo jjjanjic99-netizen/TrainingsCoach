@@ -36,6 +36,7 @@ const TABLE_LABELS: Record<string, string> = {
   sessions: "Trainingseinheiten",
   assessments: "Assessments",
   readiness: "Readiness-Einträge",
+  plans: "Trainingsplan",
 };
 
 type Status = { kind: "ok" | "error"; text: string } | null;

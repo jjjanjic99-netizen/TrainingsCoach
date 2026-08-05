@@ -6,8 +6,18 @@ eigenes Icon, **offline-fähig**, Daten bleiben **lokal auf dem Gerät** (kein
 Backend). Die Oberfläche ist durchgehend auf Deutsch (Schweizer Schreibweise,
 metrische Einheiten).
 
-> **Status: Stufe 2** – MVP. Die App wird in Ausbaustufen entwickelt
+> **Status: Stufe 3** – Trainingsplan. Die App wird in Ausbaustufen entwickelt
 > (siehe [`CLAUDE.md`](./CLAUDE.md)).
+
+## Was in Stufe 3 enthalten ist
+
+- **Trainingsplan-Generator**: periodisiert (Base → Build → Peak → Taper) nach
+  „Wochen bis Rennen" (aus dem Profil) oder wählbarer Dauer und nach Level
+- Wochenstruktur mit Easy-/Tempo-/Intervall-/Long-Run, Kraft-/Stationstraining,
+  Compromised-Running und Renntempo-Simulationen; progressive Steigerung mit
+  regelmässigen Deload-Wochen
+- **Wochenansicht** mit Phasen-/Deload-Anzeige, Fortschrittsbalken,
+  Wochen-Navigation und **abhakbaren Einheiten** (lokal gespeichert)
 
 ## Was in Stufe 2 enthalten ist (MVP)
 
