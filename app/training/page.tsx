@@ -1,28 +1,31 @@
 import type { Metadata } from "next";
-import { Dumbbell } from "lucide-react";
-import { Card, CardBody, CardHeader, ComingSoon } from "@/components/ui";
+import Link from "next/link";
+import { ChevronRight, Upload } from "lucide-react";
+import { SectionTitle } from "@/components/ui";
+import { AddSessionButton, SessionList } from "@/components/session-list";
 
 export const metadata: Metadata = { title: "Training" };
 
 export default function TrainingPage() {
   return (
     <div className="space-y-6">
-      <Card>
-        <CardHeader
-          title="Trainings-Logging"
-          subtitle="Jede Einheit schnell erfassen – auch unterwegs."
-          icon={<Dumbbell className="h-5 w-5" />}
-        />
-        <CardBody className="pt-2 text-sm text-muted-foreground">
-          Hier loggst du künftig Typ, Stationszeiten/Reps/Gewichte, Lauf-Splits,
-          RPE (1–10), optional Herzfrequenz und Notizen.
-        </CardBody>
-      </Card>
+      <AddSessionButton />
 
-      <ComingSoon stage="Kommt in Stufe 2">
-        Das Trainings-Logging mit Schnell-Eingabe wird in der nächsten
-        Ausbaustufe umgesetzt. Die Datenschicht dafür ist bereits vorbereitet.
-      </ComingSoon>
+      <Link
+        href="/import"
+        className="flex items-center justify-between gap-3 rounded-2xl border border-border bg-card p-4 text-sm font-semibold shadow-sm transition hover:border-primary/40"
+      >
+        <span className="flex items-center gap-3">
+          <Upload className="h-5 w-5 text-primary" aria-hidden />
+          Watch-Daten importieren (CSV/JSON)
+        </span>
+        <ChevronRight className="h-4 w-4 text-muted-foreground" aria-hidden />
+      </Link>
+
+      <section className="space-y-2">
+        <SectionTitle>Verlauf</SectionTitle>
+        <SessionList />
+      </section>
     </div>
   );
 }

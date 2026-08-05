@@ -1,13 +1,69 @@
 # Hyrox Coach
 
+[![CI](https://github.com/jjjanjic99-netizen/TrainingsCoach/actions/workflows/ci.yml/badge.svg)](https://github.com/jjjanjic99-netizen/TrainingsCoach/actions/workflows/ci.yml)
+
 Persönliche **Hyrox-Trainings-Coach-App** als installierbare **PWA** – gebaut
 für die Nutzung auf dem iPhone über „Zum Home-Bildschirm hinzufügen": Vollbild,
 eigenes Icon, **offline-fähig**, Daten bleiben **lokal auf dem Gerät** (kein
 Backend). Die Oberfläche ist durchgehend auf Deutsch (Schweizer Schreibweise,
 metrische Einheiten).
 
-> **Status: Stufe 1** – App-Grundgerüst. Die App wird in Ausbaustufen
-> entwickelt (siehe [`CLAUDE.md`](./CLAUDE.md)).
+> **Status: Stufe 6 (alle Stufen umgesetzt).** Entwicklung in Ausbaustufen
+> (siehe [`CLAUDE.md`](./CLAUDE.md)).
+
+## Was in Stufe 6 enthalten ist
+
+- **Watch-Daten-Import** (`/import`): CSV oder JSON exportierter Workouts
+  einlesen, in einer Vorschau prüfen und als neue Einheit anlegen oder einer
+  bestehenden zuordnen (siehe [Import-Schema](#import-schema-für-watch-daten))
+- **Recovery/Readiness** (`/readiness`): täglicher Kurz-Input (Schlaf,
+  Muskelkater, Motivation) mit einfacher Deload-/Erholungs-Empfehlung
+
+## Was in Stufe 5 enthalten ist
+
+- **Renn-Simulator/Prognose** (`/prognose`): geschätzte Finishzeit aus
+  Stationssplits + 8 Läufen + Roxzone, inkl. Verlauf über die Zeit
+- **Limitierende Stationen** und ein **Stärken/Schwächen-Radar** relativ zu den
+  Zielsplits (aus der Ziel-Finishzeit oder einem Referenz-Benchmark)
+- Interaktive **Was-wäre-wenn-Szenarien** (Splits/Pace anpassen → neue
+  Gesamtzeit)
+- Wall Balls werden ab hier zeitbasiert getrackt (alle 8 Stationen fliessen in
+  die Prognose ein)
+
+## Was in Stufe 4 enthalten ist
+
+- **Pace-Zonen aus einem Lauf-Test** (VDOT nach Jack Daniels): Easy, Marathon,
+  Threshold, Interval und Repetition – vorbelegt aus dem Baseline-Assessment
+  (1 km/5 km) oder frei eingebbar
+- **Intervall-Workouts** mit konkreten Zielzeiten je Wiederholung
+  (Cruise-Intervalle, VO₂max-Intervalle, Wiederholungen)
+- **Wochenkilometer-Progression** mit begrenzter Steigerung (~10 %/Woche) und
+  Deload alle 4 Wochen – Startwert automatisch aus geloggten Läufen
+- Verzahnt mit dem Hyrox-Plan (Route `/lauf`)
+
+## Was in Stufe 3 enthalten ist
+
+- **Trainingsplan-Generator**: periodisiert (Base → Build → Peak → Taper) nach
+  „Wochen bis Rennen" (aus dem Profil) oder wählbarer Dauer und nach Level
+- Wochenstruktur mit Easy-/Tempo-/Intervall-/Long-Run, Kraft-/Stationstraining,
+  Compromised-Running und Renntempo-Simulationen; progressive Steigerung mit
+  regelmässigen Deload-Wochen
+- **Wochenansicht** mit Phasen-/Deload-Anzeige, Fortschrittsbalken,
+  Wochen-Navigation und **abhakbaren Einheiten** (lokal gespeichert)
+
+## Was in Stufe 2 enthalten ist (MVP)
+
+- **Profil**: Name, Alter, Geschlecht, Körpergewicht, Division
+  (Open/Pro/Doubles/Relay), Level, Ziel-Renndatum und Ziel-Finishzeit
+- **Baseline-Assessment**: Startwerte pro Station (Zeit/Reps/Last) plus
+  Lauf-Benchmarks (1 km Time-Trial, 5 km) – wiederholbar
+- **Trainings-Logging**: Einheiten erfassen/bearbeiten/löschen mit Typ,
+  Dauer, Distanz, Lauf-Splits, Stationsergebnissen, RPE, Herzfrequenz und
+  Notizen
+- **Fortschritts-Dashboard**: Kennzahlen, Stationstrend (wählbar),
+  Lauf-Pace-Entwicklung, Wochenvolumen und automatisch abgeleitete
+  Bestleistungen pro Station (Diagramme via `recharts`)
+- Startseite mit Begrüssung, Renn-Countdown und Setup-Fortschritt
 
 ## Was in Stufe 1 enthalten ist
 
@@ -54,6 +110,18 @@ npm start
 1. Seite in **Safari** öffnen (nicht in einer In-App-Ansicht).
 2. Teilen-Menü → **„Zum Home-Bildschirm"**.
 3. Die App startet danach im Vollbild und funktioniert offline.
+
+## Testen & Demo-Daten
+
+Ausführliche Test- und iPhone-Anleitung: **[`TESTING.md`](./TESTING.md)**.
+
+```bash
+npm run build && npm run typecheck && npm run lint && npm run test
+```
+
+Zum sofortigen Ausprobieren: **Einstellungen → Testdaten → „Demo-Daten laden"**
+befüllt Dashboard, Charts, Prognose und Radar mit klar gekennzeichneten
+Beispiel-Einträgen (jederzeit rückstandslos löschbar).
 
 ## Deployment
 
@@ -111,6 +179,50 @@ mitgesichert):
 
 Beim Import kann zwischen **Ersetzen** (vorhandene Daten überschreiben) und
 **Zusammenführen** (per Primärschlüssel ergänzen/aktualisieren) gewählt werden.
+
+## Import-Schema für Watch-Daten
+
+Unter **Training → „Watch-Daten importieren"** (`/import`) lassen sich
+exportierte Workouts als **CSV** oder **JSON** einlesen. `date` ist Pflicht,
+alle übrigen Felder sind optional. Feldnamen sind gross-/kleinunabhängig und
+kennen deutsche/englische Aliase.
+
+**Felder:** `date` (YYYY-MM-DD oder DD.MM.YYYY), `type` (z. B. `easy_run`,
+`tempo_run`, `long_run`, `interval_run`, `strength`, `compromised_run`,
+`race_simulation` – auch Aliase wie `run`, `lauf`, `tempo`), `duration`
+(`mm:ss`, `hh:mm:ss` oder Sekunden), `distance` (Meter) bzw. `distance_km`,
+`avg_hr`, `max_hr`, `notes`. **Splits** werden nur im JSON-Format unterstützt.
+
+**CSV-Beispiel:**
+
+```csv
+date,type,duration,distance,avg_hr,max_hr,notes
+2026-08-01,easy_run,00:42:30,8000,142,156,Lockerer Dauerlauf
+2026-08-03,tempo_run,00:35:00,7500,165,178,4x 1km Schwelle
+```
+
+**JSON-Beispiel (mit Splits):**
+
+```json
+[
+  {
+    "date": "2026-08-01",
+    "type": "long_run",
+    "durationSeconds": 5400,
+    "distanceM": 15000,
+    "avgHr": 148,
+    "maxHr": 165,
+    "splits": [
+      { "distanceM": 1000, "durationSeconds": 350 },
+      { "distanceM": 1000, "durationSeconds": 345 }
+    ]
+  }
+]
+```
+
+Jeder erkannte Eintrag kann in der Vorschau **als neue Einheit** angelegt oder
+**einer bestehenden Einheit zugeordnet** werden (Herzfrequenz, Distanz, Dauer
+und Splits werden übernommen). Manuelle Eingabe bleibt jederzeit möglich.
 
 ## Daten & Privatsphäre
 

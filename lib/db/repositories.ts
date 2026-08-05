@@ -14,6 +14,7 @@ import {
   type ReadinessEntry,
   type TrainingSession,
 } from "./types";
+import { PLAN_ID, type TrainingPlan } from "@/lib/hyrox/plan";
 
 const now = () => new Date().toISOString();
 
@@ -59,6 +60,10 @@ export async function deletePersonalRecord(id: number): Promise<void> {
 
 export function listSessions(): Promise<TrainingSession[]> {
   return db.sessions.orderBy("date").reverse().toArray();
+}
+
+export function getSession(id: number): Promise<TrainingSession | undefined> {
+  return db.sessions.get(id);
 }
 
 export async function addSession(
@@ -109,4 +114,38 @@ export async function upsertReadiness(
 
 export function listReadiness(): Promise<ReadinessEntry[]> {
   return db.readiness.orderBy("date").reverse().toArray();
+}
+
+/* --------------------------- Trainingsplan ----------------------------- */
+
+export function getActivePlan(): Promise<TrainingPlan | undefined> {
+  return db.plans.get(PLAN_ID);
+}
+
+/** Speichert (ersetzt) den aktiven Plan. */
+export async function savePlan(plan: TrainingPlan): Promise<void> {
+  await db.plans.put({ ...plan, id: PLAN_ID });
+}
+
+export async function deletePlan(): Promise<void> {
+  await db.plans.delete(PLAN_ID);
+}
+
+/** Hakt eine geplante Einheit ab (oder wieder ab) und persistiert. */
+export async function setPlanSessionDone(
+  sessionId: string,
+  done: boolean,
+): Promise<void> {
+  const plan = await db.plans.get(PLAN_ID);
+  if (!plan) return;
+  const today = now().slice(0, 10);
+  const weeks = plan.weeks.map((week) => ({
+    ...week,
+    sessions: week.sessions.map((s) =>
+      s.id === sessionId
+        ? { ...s, done, completedDate: done ? today : undefined }
+        : s,
+    ),
+  }));
+  await db.plans.put({ ...plan, weeks });
 }

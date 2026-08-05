@@ -88,12 +88,26 @@ Wechsel mit 8 Stationen (jeweils **Lauf → Station**):
 1. **[erledigt]** Projekt-Setup + PWA-Grundgerüst: Scaffold, Manifest, Service
    Worker/Offline, Home-Screen-Onboarding, Safe-Area, Dexie-Datenschicht,
    JSON-Export/Import, Tab-Bar-Navigation, Dark-Mode.
-2. MVP: Profil + Baseline-Assessment + Trainings-Logging + Dashboard mit
-   Stationstrend.
-3. Trainingsplan-Generator + Wochenansicht.
-4. Lauf-Coaching-Modul + Pace-Zonen.
-5. Renn-Simulator/Prognose + Stärken/Schwächen-Radar + Was-wäre-wenn.
-6. CSV/JSON-Import-Schema für Watch-Daten + optional Readiness/Push.
+2. **[erledigt]** MVP: Profil + Baseline-Assessment + Trainings-Logging +
+   Dashboard mit Stationstrend (Auswertungen in `lib/hyrox/stats.ts`,
+   Diagramme via recharts in `components/charts.tsx`).
+3. **[erledigt]** Trainingsplan-Generator + Wochenansicht (periodisiert
+   Base→Build→Peak→Taper mit Deload; Logik in `lib/hyrox/plan.ts`, UI in
+   `components/plan-view.tsx`, Persistenz in Dexie-Tabelle `plans`).
+4. **[erledigt]** Lauf-Coaching-Modul + Pace-Zonen (VDOT-Logik in
+   `lib/hyrox/running.ts`: Pace-Zonen, Intervall-Workouts,
+   Wochenkilometer-Progression; UI in `components/lauf-coaching.tsx`,
+   Route `/lauf`).
+5. **[erledigt]** Renn-Simulator/Prognose + Stärken/Schwächen-Radar +
+   Was-wäre-wenn (Logik in `lib/hyrox/forecast.ts`, UI in
+   `components/race-simulator.tsx`, Radar via recharts, Route `/prognose`).
+   Hinweis: Wall Balls werden seit dieser Stufe zeitbasiert getrackt
+   (`metric: "time"`), damit alle 8 Stationen in die Prognose einfliessen.
+6. **[erledigt]** CSV/JSON-Import für Watch-Daten (Parser in
+   `lib/import/watch-import.ts`, UI `components/watch-import.tsx`, Route
+   `/import`) + Recovery/Readiness (Logik `lib/hyrox/readiness.ts`, UI
+   `components/readiness-view.tsx`, Route `/readiness`, Dexie-Tabelle
+   `readiness`). Push-Benachrichtigungen bleiben eine spätere Option.
 
 **Arbeitsweise:** Je Stufe einen lauffähigen Stand liefern, committen und
 stoppen. Erst nach OK die nächste Stufe.

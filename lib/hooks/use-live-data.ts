@@ -12,9 +12,12 @@
 import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "@/lib/db/db";
 import {
+  getActivePlan,
   getLatestAssessment,
   getProfile,
+  getSession,
   listPersonalRecords,
+  listReadiness,
   listSessions,
 } from "@/lib/db/repositories";
 
@@ -28,6 +31,20 @@ export function useSessions() {
   return useLiveQuery(() => listSessions(), []);
 }
 
+/**
+ * Einzelne Trainingseinheit per ID.
+ * Rückgabe: undefined = lädt, null = nicht gefunden.
+ */
+export function useSession(id: number | undefined) {
+  return useLiveQuery(
+    async () => {
+      if (id == null || Number.isNaN(id)) return null;
+      return (await getSession(id)) ?? null;
+    },
+    [id],
+  );
+}
+
 /** Alle persönlichen Rekorde. */
 export function usePersonalRecords() {
   return useLiveQuery(() => listPersonalRecords(), []);
@@ -36,6 +53,19 @@ export function usePersonalRecords() {
 /** Jüngstes Baseline-Assessment. */
 export function useLatestAssessment() {
   return useLiveQuery(() => getLatestAssessment(), []);
+}
+
+/**
+ * Aktiver Trainingsplan.
+ * Rückgabe: undefined = lädt, null = keiner vorhanden.
+ */
+export function useActivePlan() {
+  return useLiveQuery(async () => (await getActivePlan()) ?? null, []);
+}
+
+/** Alle Readiness-Einträge, neueste zuerst. */
+export function useReadiness() {
+  return useLiveQuery(() => listReadiness(), []);
 }
 
 /** Anzahl Zeilen je Tabelle (für Speicher-/Datenübersicht). */

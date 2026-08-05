@@ -10,6 +10,7 @@ import { useRef, useState } from "react";
 import {
   Database,
   Download,
+  FlaskConical,
   Info,
   Monitor,
   Moon,
@@ -28,6 +29,7 @@ import {
   importFromFile,
   type ImportMode,
 } from "@/lib/db/backup";
+import { clearDemoData, seedDemoData } from "@/lib/db/seed";
 
 /** Deutsche Labels für die Tabellen in der Speicherübersicht. */
 const TABLE_LABELS: Record<string, string> = {
@@ -36,6 +38,7 @@ const TABLE_LABELS: Record<string, string> = {
   sessions: "Trainingseinheiten",
   assessments: "Assessments",
   readiness: "Readiness-Einträge",
+  plans: "Trainingsplan",
 };
 
 type Status = { kind: "ok" | "error"; text: string } | null;
@@ -76,6 +79,32 @@ export function SettingsView() {
     } finally {
       setBusy(false);
       if (fileInputRef.current) fileInputRef.current.value = "";
+    }
+  }
+
+  async function handleSeed() {
+    setBusy(true);
+    setStatus(null);
+    try {
+      await seedDemoData();
+      setStatus({ kind: "ok", text: "Demo-Daten geladen." });
+    } catch {
+      setStatus({ kind: "error", text: "Demo-Daten konnten nicht geladen werden." });
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleClearDemo() {
+    setBusy(true);
+    setStatus(null);
+    try {
+      await clearDemoData();
+      setStatus({ kind: "ok", text: "Demo-Daten entfernt." });
+    } catch {
+      setStatus({ kind: "error", text: "Entfernen fehlgeschlagen." });
+    } finally {
+      setBusy(false);
     }
   }
 
@@ -231,6 +260,35 @@ export function SettingsView() {
               ))
             )}
           </ul>
+        </Card>
+      </section>
+
+      {/* Testdaten */}
+      <section className="space-y-2">
+        <SectionTitle>Testdaten</SectionTitle>
+        <Card>
+          <CardHeader
+            title="Demo-Daten"
+            subtitle="Mehrere Wochen Beispiel-Einträge zum Ausprobieren."
+            icon={<FlaskConical className="h-5 w-5" />}
+          />
+          <CardBody className="space-y-3 pt-2">
+            <p className="text-sm text-muted-foreground">
+              Befüllt Dashboard, Charts, Prognose und Radar mit klar
+              gekennzeichneten Testdaten. Jederzeit rückstandslos entfernbar –
+              deine echten Einträge bleiben unberührt.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <Button onClick={handleSeed} disabled={busy}>
+                <FlaskConical className="h-4 w-4" aria-hidden />
+                Demo-Daten laden
+              </Button>
+              <Button variant="secondary" onClick={handleClearDemo} disabled={busy}>
+                <Trash2 className="h-4 w-4" aria-hidden />
+                Demo-Daten löschen
+              </Button>
+            </div>
+          </CardBody>
         </Card>
       </section>
 

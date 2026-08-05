@@ -113,8 +113,10 @@ export const HYROX_STATIONS: readonly HyroxStation[] = [
     order: 8,
     name: "Wall Balls",
     shortName: "Wall Balls",
-    metric: "reps",
-    description: "Wall Balls: 100 Reps (Männer) bzw. 75 Reps (Frauen).",
+    // Im Rennen zeitgemessen (die Rep-Zahl ist fix: 100 Männer / 75 Frauen).
+    // Deshalb wird die Zeit für den Satz getrackt (siehe WALL_BALL_REPS).
+    metric: "time",
+    description: "Wall Balls: Zeit für den Satz (100 Reps Männer / 75 Frauen).",
   },
 ] as const;
 
@@ -130,6 +132,18 @@ export const WALL_BALL_REPS = {
   /** Divers: Standardwert; im Profil anpassbar. */
   d: 100,
 } as const;
+
+/**
+ * Stationen mit relevantem Gewicht (Last in kg) – abhängig von der Division.
+ * Für diese Stationen wird im Baseline-Assessment/Logging ein kg-Feld angeboten.
+ */
+export const STATIONS_WITH_LOAD: ReadonlySet<HyroxStationId> = new Set<HyroxStationId>([
+  "sled_push",
+  "sled_pull",
+  "farmers_carry",
+  "sandbag_lunges",
+  "wall_balls",
+]);
 
 /** Schnellzugriff auf eine Station per ID. */
 export function getStation(id: HyroxStationId): HyroxStation {

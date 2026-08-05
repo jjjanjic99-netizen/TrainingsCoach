@@ -1,54 +1,37 @@
 import Link from "next/link";
 import {
-  Activity,
   CheckCircle2,
   ChevronRight,
   Circle,
   Dumbbell,
   Footprints,
+  HeartPulse,
+  Timer,
 } from "lucide-react";
 import { InstallPrompt } from "@/components/install-prompt";
+import { HomeStatus } from "@/components/home-status";
 import { Card, CardBody, CardHeader, SectionTitle } from "@/components/ui";
 import { HYROX_STATIONS, RUN_SEGMENTS, RUN_DISTANCE_M } from "@/lib/hyrox/stations";
 
 /** Ausbaustufen der App (für die Roadmap auf der Startseite). */
 const STAGES: Array<{ n: number; title: string; done: boolean }> = [
   { n: 1, title: "PWA-Grundgerüst, Datenschicht, Navigation", done: true },
-  { n: 2, title: "Profil, Baseline-Assessment, Logging, Dashboard", done: false },
-  { n: 3, title: "Trainingsplan-Generator & Wochenansicht", done: false },
-  { n: 4, title: "Lauf-Coaching & Pace-Zonen", done: false },
-  { n: 5, title: "Renn-Simulator, Prognose & Radar", done: false },
-  { n: 6, title: "Watch-Import (CSV/JSON) & Readiness", done: false },
+  { n: 2, title: "Profil, Baseline-Assessment, Logging, Dashboard", done: true },
+  { n: 3, title: "Trainingsplan-Generator & Wochenansicht", done: true },
+  { n: 4, title: "Lauf-Coaching & Pace-Zonen", done: true },
+  { n: 5, title: "Renn-Simulator, Prognose & Radar", done: true },
+  { n: 6, title: "Watch-Import (CSV/JSON) & Readiness", done: true },
 ];
 
 export default function HomePage() {
+  const nextStage = STAGES.find((s) => !s.done)?.n;
+
   return (
     <div className="space-y-6">
       <InstallPrompt />
 
-      {/* Begrüssung */}
-      <Card>
-        <CardBody className="pt-4">
-          <div className="flex items-center gap-2 text-primary">
-            <Activity className="h-5 w-5" aria-hidden />
-            <span className="text-xs font-semibold uppercase tracking-wide">
-              Willkommen
-            </span>
-          </div>
-          <h1 className="mt-2 text-xl font-bold leading-snug">
-            Dein persönlicher Hyrox-Coach
-          </h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Training tracken, strukturierte Einheiten planen und Woche für Woche
-            sehen, wo du besser wirst – alles offline auf deinem Gerät.
-          </p>
-          <p className="mt-3 rounded-xl bg-muted px-3 py-2 text-sm text-muted-foreground">
-            Diese Version enthält <strong className="text-foreground">Stufe 1</strong>{" "}
-            (App-Grundgerüst). Profil, Logging und Dashboard folgen in der
-            nächsten Stufe.
-          </p>
-        </CardBody>
-      </Card>
+      {/* Dynamischer Status: Begrüssung, Countdown, Setup-Fortschritt */}
+      <HomeStatus />
 
       {/* Roadmap */}
       <section className="space-y-2">
@@ -67,7 +50,11 @@ export default function HomePage() {
                     Stufe {stage.n}
                     {stage.done ? (
                       <span className="ml-2 rounded-full bg-primary/15 px-2 py-0.5 text-[11px] font-semibold text-primary">
-                        aktiv
+                        erledigt
+                      </span>
+                    ) : stage.n === nextStage ? (
+                      <span className="ml-2 rounded-full bg-muted px-2 py-0.5 text-[11px] font-semibold text-muted-foreground">
+                        als Nächstes
                       </span>
                     ) : null}
                   </p>
@@ -115,7 +102,9 @@ export default function HomePage() {
         <SectionTitle>Schnellzugriff</SectionTitle>
         <div className="grid grid-cols-2 gap-3">
           <QuickLink href="/training" label="Training loggen" icon={<Dumbbell className="h-5 w-5" />} />
-          <QuickLink href="/fortschritt" label="Fortschritt" icon={<Activity className="h-5 w-5" />} />
+          <QuickLink href="/lauf" label="Lauf-Coaching" icon={<Footprints className="h-5 w-5" />} />
+          <QuickLink href="/prognose" label="Prognose" icon={<Timer className="h-5 w-5" />} />
+          <QuickLink href="/readiness" label="Readiness" icon={<HeartPulse className="h-5 w-5" />} />
         </div>
       </section>
     </div>
